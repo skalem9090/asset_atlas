@@ -1,0 +1,55 @@
+<div class="dry-run-dialog">
+  <div class="info-header">
+    <i class="fas fa-info-circle"></i>
+    <h3>Dry Run Results</h3>
+  </div>
+
+  <div class="dry-run-summary">
+    <p>The following assets would be deleted:</p>
+    <div class="summary-stats">
+      <div class="stat">
+        <span class="stat-label">Total Assets:</span>
+        <span class="stat-value">{{totalCount}}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Total Size:</span>
+        <span class="stat-value">{{formatBytes totalSize}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="asset-list">
+    <h4>Assets:</h4>
+    <ul>
+      {{#each assets}}
+      <li>
+        <span class="asset-name">{{name}}</span>
+        <span class="asset-path">{{path}}</span>
+        <span class="asset-size">({{formatBytes size}})</span>
+        {{#if usage.count}}
+        <span class="usage-badge warning" title="Used in {{usage.count}} places">
+          <i class="fas fa-exclamation-triangle"></i> In use ({{usage.count}})
+        </span>
+        {{else}}
+        <span class="usage-badge safe" title="Not in use">
+          <i class="fas fa-check"></i> Unused
+        </span>
+        {{/if}}
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="info-note">
+    <p><i class="fas fa-info-circle"></i> This is a preview only. No files have been deleted.</p>
+  </div>
+
+  <div class="button-group">
+    <button type="button" class="proceed-button">
+      <i class="fas fa-trash"></i> Proceed with Deletion
+    </button>
+    <button type="button" class="close-button">
+      <i class="fas fa-times"></i> Close
+    </button>
+  </div>
+</div>

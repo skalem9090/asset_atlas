@@ -1,0 +1,32 @@
+{
+  "id": "asset-atlas",
+  "title": "Asset Atlas",
+  "description": "A visual, searchable, taggable browser for all Foundry assets with tools for organization and cleanup.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "Sublyme Studios",
+      "discord": "nooneknowswon"
+    }
+  ],
+  "esmodules": [
+    "scripts/asset-atlas.js"
+  ],
+  "styles": [
+    "styles/asset-atlas.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "",
+  "manifest": "",
+  "download": ""
+}

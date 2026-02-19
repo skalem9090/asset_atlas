@@ -1,0 +1,70 @@
+<div class="move-rename-dialog">
+  <form>
+    <div class="form-group">
+      <label for="asset-name">Asset Name:</label>
+      <div class="current-path">{{currentPath}}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="new-path">New Path:</label>
+      <input 
+        type="text" 
+        id="new-path" 
+        name="newPath" 
+        value="{{suggestedPath}}" 
+        required 
+      />
+    </div>
+
+    {{#if hasReferences}}
+    <div class="warning-section">
+      <h3><i class="fas fa-exclamation-triangle"></i> Affected References</h3>
+      <p>This asset is used in {{totalReferences}} document(s). All references will be updated:</p>
+      
+      <div class="reference-list">
+        {{#if usage.scenes.length}}
+        <div class="reference-group">
+          <h4>Scenes ({{usage.scenes.length}})</h4>
+          <ul>
+            {{#each usage.scenes}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{#if usage.journals.length}}
+        <div class="reference-group">
+          <h4>Journals ({{usage.journals.length}})</h4>
+          <ul>
+            {{#each usage.journals}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{#if usage.actors.length}}
+        <div class="reference-group">
+          <h4>Actors ({{usage.actors.length}})</h4>
+          <ul>
+            {{#each usage.actors}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    <div class="button-group">
+      <button type="submit" class="confirm-button">
+        <i class="fas fa-check"></i> Confirm
+      </button>
+      <button type="button" class="cancel-button">
+        <i class="fas fa-times"></i> Cancel
+      </button>
+    </div>
+  </form>
+</div>

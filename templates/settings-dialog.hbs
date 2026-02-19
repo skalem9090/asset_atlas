@@ -1,0 +1,92 @@
+<form class="asset-atlas-settings-form">
+  <div class="form-group">
+    <label for="watchedDirectories">Watched Directories</label>
+    <p class="notes">Enter one directory path per line. These directories will be scanned for assets.</p>
+    <textarea 
+      name="watchedDirectories" 
+      rows="5" 
+      placeholder="worlds&#10;modules&#10;systems">{{watchedDirList}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="excludedDirectories">Excluded Directories</label>
+    <p class="notes">Enter one directory path per line. These directories will be excluded from scanning.</p>
+    <textarea 
+      name="excludedDirectories" 
+      rows="5" 
+      placeholder="node_modules&#10;.git">{{excludedDirList}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="thumbnailSize">Thumbnail Size</label>
+    <p class="notes">Choose the size of asset thumbnails in the browser.</p>
+    <select name="thumbnailSize">
+      {{#each thumbnailSizes}}
+        <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="autoScanInterval">Auto-Scan Interval (minutes)</label>
+    <p class="notes">How often to automatically scan for new assets. Set to 0 to disable automatic scanning.</p>
+    <input 
+      type="number" 
+      name="autoScanInterval" 
+      min="0" 
+      step="1" 
+      value="{{settings.autoScanInterval}}" 
+      placeholder="0" />
+  </div>
+
+  <div class="form-group">
+    <label for="assetsPerPage">Assets Per Page</label>
+    <p class="notes">Number of assets to display per page (20-500).</p>
+    <input 
+      type="number" 
+      name="assetsPerPage" 
+      min="20" 
+      max="500" 
+      step="20" 
+      value="{{assetsPerPage}}" 
+      placeholder="100" />
+  </div>
+
+  <div class="form-group">
+    <label>
+      <input 
+        type="checkbox" 
+        name="showSidebarButton" 
+        {{#if showSidebarButton}}checked{{/if}} />
+      Show Sidebar Button
+    </label>
+    <p class="notes">Display Asset Atlas button in Token controls sidebar.</p>
+  </div>
+
+  <div class="form-group">
+    <label>
+      <input 
+        type="checkbox" 
+        name="enableFilePickerIntegration" 
+        {{#if enableFilePickerIntegration}}checked{{/if}} />
+      Enable FilePicker Integration
+    </label>
+    <p class="notes">Integrate Asset Atlas into Foundry's file picker dialogs.</p>
+  </div>
+
+  <div class="form-group">
+    <p class="notes"><strong>Keybind:</strong> Press <kbd>`</kbd> (tilde/backtick key) to toggle the Asset Browser. You can customize this in Foundry's Configure Controls settings.</p>
+  </div>
+
+  <div class="form-group buttons">
+    <button type="button" name="save" class="bright">
+      <i class="fas fa-save"></i> Save Settings
+    </button>
+    <button type="button" name="reset">
+      <i class="fas fa-undo"></i> Reset to Defaults
+    </button>
+    <button type="button" name="cancel">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+  </div>
+</form>

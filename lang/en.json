@@ -1,0 +1,61 @@
+{
+  "ASSET_ATLAS": {
+    "Title": "Asset Atlas",
+    "Description": "Visual asset browser and manager",
+    
+    "Settings": {
+      "WatchedDirectories": "Watched Directories",
+      "WatchedDirectoriesHint": "Directories to scan for assets",
+      "ExcludedDirectories": "Excluded Directories",
+      "ExcludedDirectoriesHint": "Directories to exclude from scanning",
+      "ThumbnailSize": "Thumbnail Size",
+      "ThumbnailSizeHint": "Size of asset thumbnails in the browser",
+      "AutoScanInterval": "Auto-Scan Interval",
+      "AutoScanIntervalHint": "Minutes between automatic scans (0 = disabled)"
+    },
+    
+    "UI": {
+      "SearchPlaceholder": "Search assets by name...",
+      "FilterType": "Type:",
+      "FilterTags": "Tags:",
+      "FilterSize": "Size:",
+      "FilterUnused": "Unused only",
+      "SelectedCount": "asset(s) selected",
+      "AddTags": "Add Tags",
+      "RemoveTags": "Remove Tags",
+      "ClearSelection": "Clear",
+      "Refresh": "Refresh",
+      "NoAssets": "No assets found matching your criteria.",
+      "TryAdjusting": "Try adjusting your filters or search query."
+    },
+    
+    "Details": {
+      "Path": "Path:",
+      "Type": "Type:",
+      "Size": "Size:",
+      "Modified": "Modified:",
+      "Dimensions": "Dimensions:",
+      "Duration": "Duration:",
+      "Tags": "Tags",
+      "Usage": "Usage",
+      "Scenes": "Scenes",
+      "Journals": "Journals",
+      "Actors": "Actors",
+      "UnusedNotice": "This asset is not currently used in any documents.",
+      "AddTag": "Add Tag",
+      "MoveRename": "Move/Rename",
+      "Delete": "Delete",
+      "Close": "Close"
+    },
+    
+    "Notifications": {
+      "Ready": "Asset Atlas is ready!",
+      "InitError": "Asset Atlas failed to initialize. Check console for details.",
+      "NoSelection": "No assets selected",
+      "TagAdded": "Added tag \"{tag}\" to {count} assets",
+      "TagRemoved": "Removed tag \"{tag}\" from {count} assets",
+      "AssetsRefreshed": "Assets refreshed",
+      "ScanComplete": "Asset scan complete"
+    }
+  }
+}
