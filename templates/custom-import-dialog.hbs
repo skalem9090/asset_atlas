@@ -1,0 +1,75 @@
+<div class="custom-import-dialog">
+  <div class="import-header">
+    <h3>Import Assets to {{destinationLabel}}</h3>
+    <p class="import-description">Select files to import into your Asset Atlas</p>
+  </div>
+
+  <div class="import-body">
+    <!-- Target Directory -->
+    <div class="form-group">
+      <label for="target-directory">Target Directory:</label>
+      <input 
+        type="text" 
+        class="target-directory" 
+        value="{{targetDirectory}}" 
+        placeholder="Enter target directory path"
+      />
+    </div>
+
+    <!-- File Selection Area -->
+    <div class="drop-zone">
+      <input 
+        type="file" 
+        id="file-input" 
+        multiple 
+        accept="image/*,video/*,audio/*" 
+        style="display: none;"
+      />
+      
+      {{#if hasFiles}}
+      <div class="selected-files">
+        <div class="files-header">
+          <h4>Selected Files ({{fileCount}})</h4>
+          <button class="clear-files" title="Clear all files">
+            <i class="fas fa-times"></i> Clear
+          </button>
+        </div>
+        <ul class="file-list">
+          {{#each selectedFiles}}
+          <li class="file-item">
+            <div class="file-icon">
+              {{#if (eq type "image")}}<i class="fas fa-image"></i>{{/if}}
+              {{#if (eq type "audio")}}<i class="fas fa-music"></i>{{/if}}
+              {{#if (eq type "video")}}<i class="fas fa-video"></i>{{/if}}
+            </div>
+            <div class="file-info">
+              <div class="file-name">{{name}}</div>
+              <div class="file-size">{{size}}</div>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{else}}
+      <div class="drop-zone-content">
+        <i class="fas fa-cloud-upload-alt fa-3x"></i>
+        <p class="drop-zone-text">Drag and drop files here</p>
+        <p class="drop-zone-subtext">or</p>
+        <button class="browse-files">
+          <i class="fas fa-folder-open"></i> Browse Files
+        </button>
+        <p class="drop-zone-hint">Supports images, videos, and audio files</p>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="import-footer">
+    <button class="cancel-button">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+    <button class="import-button" {{#unless hasFiles}}disabled{{/unless}}>
+      <i class="fas fa-file-import"></i> Import
+    </button>
+  </div>
+</div>

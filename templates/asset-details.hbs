@@ -1,0 +1,112 @@
+<div class="asset-details-dialog">
+  <header>
+    <h2>{{asset.name}}</h2>
+  </header>
+
+  <div class="details-content">
+    <!-- Preview -->
+    <div class="asset-preview">
+      {{#if (eq asset.type "image")}}
+      <img src="{{asset.path}}" alt="{{asset.name}}" />
+      {{/if}}
+      
+      {{#if (eq asset.type "audio")}}
+      <audio controls src="{{asset.path}}"></audio>
+      {{/if}}
+      
+      {{#if (eq asset.type "video")}}
+      <video controls src="{{asset.path}}"></video>
+      {{/if}}
+    </div>
+
+    <!-- Metadata -->
+    <div class="asset-metadata">
+      <h3>Details</h3>
+      <dl>
+        <dt>Path:</dt>
+        <dd>{{asset.path}}</dd>
+        
+        <dt>Type:</dt>
+        <dd>{{asset.type}}</dd>
+        
+        <dt>Size:</dt>
+        <dd>{{formatBytes asset.size}}</dd>
+        
+        <dt>Modified:</dt>
+        <dd>{{formatDate asset.modifiedDate}}</dd>
+        
+        {{#if asset.dimensions}}
+        <dt>Dimensions:</dt>
+        <dd>{{asset.dimensions.width}} × {{asset.dimensions.height}}</dd>
+        {{/if}}
+        
+        {{#if asset.duration}}
+        <dt>Duration:</dt>
+        <dd>{{formatDuration asset.duration}}</dd>
+        {{/if}}
+      </dl>
+    </div>
+
+    <!-- Tags -->
+    <div class="asset-tags-section">
+      <h3>Tags</h3>
+      <div class="tags-list">
+        {{#each asset.tags}}
+        <span class="tag">
+          {{this}}
+          <button class="remove-tag" data-tag="{{this}}">×</button>
+        </span>
+        {{/each}}
+      </div>
+      <button class="add-tag-btn">Add Tag</button>
+    </div>
+
+    <!-- Usage -->
+    <div class="asset-usage-section">
+      <h3>Usage ({{asset.usage.count}})</h3>
+      
+      {{#if asset.usage.scenes.length}}
+      <div class="usage-group">
+        <h4>Scenes ({{asset.usage.scenes.length}})</h4>
+        <ul>
+          {{#each asset.usage.scenes}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+      
+      {{#if asset.usage.journals.length}}
+      <div class="usage-group">
+        <h4>Journals ({{asset.usage.journals.length}})</h4>
+        <ul>
+          {{#each asset.usage.journals}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+      
+      {{#if asset.usage.actors.length}}
+      <div class="usage-group">
+        <h4>Actors ({{asset.usage.actors.length}})</h4>
+        <ul>
+          {{#each asset.usage.actors}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+      
+      {{#unless asset.usage.count}}
+      <p class="unused-notice">This asset is not currently used in any documents.</p>
+      {{/unless}}
+    </div>
+  </div>
+
+  <footer>
+    <button class="move-asset">Move/Rename</button>
+    <button class="delete-asset">Delete</button>
+    <button class="close-dialog">Close</button>
+  </footer>
+</div>

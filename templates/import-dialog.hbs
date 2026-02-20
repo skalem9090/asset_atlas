@@ -1,0 +1,66 @@
+<div class="import-dialog">
+  <div class="import-header">
+    <i class="fas fa-file-import"></i>
+    <h3>Import Assets to World</h3>
+  </div>
+
+  <div class="import-info">
+    <p>Import <strong>{{assetCount}}</strong> asset(s) from the global library to <strong>{{worldName}}</strong></p>
+  </div>
+
+  <div class="import-options">
+    <h4>Import Options:</h4>
+    
+    <div class="option-group">
+      <label>
+        <input type="checkbox" id="copy-files" checked />
+        Copy files (uncheck to create references only)
+      </label>
+    </div>
+
+    <div class="option-group">
+      <label>
+        <input type="checkbox" id="overwrite-existing" />
+        Overwrite existing files
+      </label>
+    </div>
+
+    <div class="option-group">
+      <label>
+        <input type="checkbox" id="preserve-structure" checked />
+        Preserve folder structure
+      </label>
+    </div>
+  </div>
+
+  <div class="asset-preview">
+    <h4>Assets to Import:</h4>
+    <div class="asset-list-preview">
+      {{#each assets}}
+      <div class="asset-item">
+        <span class="asset-type-icon">
+          {{#if (eq type "image")}}<i class="fas fa-image"></i>{{/if}}
+          {{#if (eq type "audio")}}<i class="fas fa-music"></i>{{/if}}
+          {{#if (eq type "video")}}<i class="fas fa-video"></i>{{/if}}
+        </span>
+        <span class="asset-name">{{name}}</span>
+        <span class="asset-size">({{formatBytes size}})</span>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="destination-info">
+    <h4>Destination:</h4>
+    <p class="destination-path">{{destinationPath}}</p>
+  </div>
+
+  <div class="button-group">
+    <button type="button" class="import-button">
+      <i class="fas fa-file-import"></i> Import Assets
+    </button>
+    <button type="button" class="cancel-button">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+  </div>
+</div>

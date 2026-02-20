@@ -1,0 +1,10 @@
+node_modules/
+dist/
+deploy/
+asset-atlas.zip
+scripts/asset-atlas.js
+scripts/asset-atlas.js.map
+*.log
+.DS_Store
+coverage/
+src/_tests_

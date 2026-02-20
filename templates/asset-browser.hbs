@@ -1,0 +1,206 @@
+<div class="asset-atlas-browser">
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" style="display: none;">
+    <div class="loading-spinner">
+      <i class="fas fa-spinner fa-spin fa-3x"></i>
+      <p class="loading-message">Loading assets...</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="browser-header">
+    <h2 class="staggered-title">
+      <span class="title-word">Sublymes</span>
+      <span class="title-word">Asset</span>
+      <span class="title-word">Atlas</span>
+    </h2>
+    <div class="header-controls">
+      <!-- Search Bar -->
+      <input 
+        type="text" 
+        id="asset-search" 
+        class="header-search"
+        placeholder="Search assets..." 
+        value="{{filters.query}}"
+      />
+      
+      <!-- Compact Filters -->
+      <select class="filter-type-compact" multiple title="Filter by type">
+        <option value="image">Images</option>
+        <option value="audio">Audio</option>
+        <option value="video">Video</option>
+      </select>
+      
+      <select class="filter-tags-compact" multiple title="Filter by tags">
+        {{#each tags}}
+        <option value="{{name}}">{{name}}</option>
+        {{/each}}
+      </select>
+      
+      <!-- Selection Info (inline) -->
+      {{#if selectedCount}}
+      <div class="selection-info-compact">
+        <span class="selected-count">{{selectedCount}}</span>
+        <button class="bulk-add-tags" title="Add Tags to Selection">
+          <i class="fas fa-tags"></i>
+        </button>
+        <button class="bulk-remove-tags" title="Remove Tags from Selection">
+          <i class="fas fa-tag"></i>
+        </button>
+        <button class="clear-selection" title="Clear Selection">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      {{/if}}
+      
+      <button class="toggle-view" title="Toggle Grid/List View">
+        <i class="fas fa-th"></i>
+      </button>
+      
+      <button class="import-to-atlas" title="Import Assets to Atlas">
+        <i class="fas fa-file-import"></i>
+      </button>
+      
+      <button class="refresh-assets" title="Refresh Assets">
+        <i class="fas fa-sync"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Area with Sidebar -->
+  <div class="browser-main-content">
+    <!-- Folder Tree Sidebar (collapsible) -->
+    <aside class="folder-tree-sidebar {{#if sidebarCollapsed}}collapsed{{/if}}">
+      <div class="folder-tree-header">
+        <h3>Folders</h3>
+        <div class="folder-header-controls">
+          {{#if selectedFolderPath}}
+          <button class="clear-folder-filter" title="Show All Assets">
+            <i class="fas fa-times"></i>
+          </button>
+          {{/if}}
+          <button class="toggle-sidebar" title="Toggle Sidebar">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="folder-tree-container">
+        {{#if folderNodes.length}}
+        <ul class="folder-tree">
+          {{#each folderNodes}}
+          <li class="folder-node {{#if (eq ../selectedFolderPath path)}}selected{{/if}}" 
+              data-folder-path="{{path}}" 
+              style="padding-left: {{multiply level 20}}px;">
+            <span class="folder-toggle" data-folder-path="{{path}}">
+              {{#if children.size}}
+                {{#if isExpanded}}
+                <i class="fas fa-caret-down"></i>
+                {{else}}
+                <i class="fas fa-caret-right"></i>
+                {{/if}}
+              {{else}}
+              <i class="fas fa-caret-right" style="visibility: hidden;"></i>
+              {{/if}}
+            </span>
+            <i class="fas {{#if isExpanded}}fa-folder-open{{else}}fa-folder{{/if}}"></i>
+            <span class="folder-name">{{name}}</span>
+            <span class="folder-count">({{assetCount}})</span>
+          </li>
+          {{/each}}
+        </ul>
+        {{else}}
+        <p class="no-folders">No folders found</p>
+        {{/if}}
+      </div>
+    </aside>
+
+    <!-- Asset Content Area -->
+    <div class="asset-content-area">
+      <!-- Breadcrumb Navigation -->
+      {{#if breadcrumbs}}
+      <nav class="breadcrumb-navigation">
+        {{#each breadcrumbs}}
+        <span class="breadcrumb-segment {{#unless path}}root{{/unless}}" data-folder-path="{{path}}">
+          {{name}}
+        </span>
+        {{#unless @last}}
+        <i class="fas fa-chevron-right breadcrumb-separator"></i>
+        {{/unless}}
+        {{/each}}
+      </nav>
+      {{/if}}
+
+      <!-- Asset Grid -->
+      <div class="asset-grid-container thumbnail-{{thumbnailSize}}">
+        {{#if totalAssets}}
+        <div class="asset-count-info">
+          Showing {{showingStart}}-{{showingEnd}} of {{totalAssets}} assets
+        </div>
+        {{/if}}
+        
+        <div class="asset-grid">
+        {{#if hasAssets}}
+          {{#each assets}}
+          <div class="asset-thumbnail" data-asset-id="{{id}}" data-asset-path="{{path}}">
+            {{#if thumbnail}}
+            <img src="{{thumbnail}}" alt="{{name}}" loading="lazy" />
+            {{else}}
+              {{#if (eq type "image")}}
+              <img src="{{path}}" alt="{{name}}" loading="lazy" />
+              {{else}}
+              <div class="asset-icon">
+                {{#if (eq type "audio")}}<i class="fas fa-music"></i>{{/if}}
+                {{#if (eq type "video")}}<i class="fas fa-video"></i>{{/if}}
+              </div>
+              {{/if}}
+            {{/if}}
+            
+            <div class="asset-info">
+              <div class="asset-name" title="{{decodeURI name}}">{{decodeURI name}}</div>
+              {{#if usage.count}}
+              <div class="asset-meta">
+                <span class="asset-usage" title="Used in {{usage.count}} places">
+                  <i class="fas fa-link"></i> {{usage.count}}
+                </span>
+              </div>
+              {{/if}}
+              
+              {{#if tags.length}}
+              <div class="asset-tags">
+                {{#each tags}}
+                <span class="tag">{{this}}</span>
+                {{/each}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+          {{/each}}
+        {{else}}
+        <div class="no-assets">
+          <p>No assets found matching your criteria.</p>
+          <p>Try adjusting your filters or search query.</p>
+        </div>
+        {{/if}}
+      </div>
+      
+      <!-- Pagination Controls (always visible) -->
+      <div class="pagination-controls">
+        <button class="page-first" {{#if (eq currentPage 1)}}disabled{{/if}} title="First Page">
+          <i class="fas fa-angle-double-left"></i>
+        </button>
+        <button class="page-prev" {{#if (eq currentPage 1)}}disabled{{/if}} title="Previous Page">
+          <i class="fas fa-angle-left"></i>
+        </button>
+        <span class="page-info">{{currentPage}} / {{totalPages}}</span>
+        <button class="page-next" {{#if (eq currentPage totalPages)}}disabled{{/if}} title="Next Page">
+          <i class="fas fa-angle-right"></i>
+        </button>
+        <button class="page-last" {{#if (eq currentPage totalPages)}}disabled{{/if}} title="Last Page">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
